@@ -6,13 +6,17 @@ const Container = () => {
     "It is easy to sit up and take notice, what's difficult is getting up and taking action."
   );
 
+  const [number, setNumber] = useState("ADVICE #117");
+
   const fetchAdvice = () => {
     fetch("https://api.adviceslip.com/advice")
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
         console.log(data.slip.advice);
+        console.log(data.slip.id);
         setAdvice(data.slip.advice);
+        setNumber(data.slip.id);
       })
       .catch((err) => {
         console.error("Error fetching data: ", err);
@@ -22,7 +26,7 @@ const Container = () => {
   return (
     <div className="container">
       <div className="box">
-        <p className="number-advice">ADVICE #117</p>
+        <p className="number-advice">{"ADVICE #" + number}</p>
         <p className="advice" id="advice">
           {advice}
         </p>
